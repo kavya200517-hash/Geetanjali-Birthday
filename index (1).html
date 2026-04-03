@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Special Surprise 🌸</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: linear-gradient(135deg, #ff5fa3 0%, #ff85c0 40%, #ffb3d9 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Nunito', sans-serif;
+    overflow: hidden;
+  }
+
+  #lockScreen {
+    background: linear-gradient(160deg, #fff0f7 0%, #ffe4f0 100%);
+    border-radius: 36px;
+    padding: 44px 40px 36px;
+    max-width: 380px;
+    width: 92%;
+    text-align: center;
+    box-shadow: 0 24px 70px rgba(255,80,160,0.35), 0 0 0 4px #ffb6d9;
+    border: 2px solid #ffa0cc;
+    animation: popIn 0.8s cubic-bezier(0.34,1.56,0.64,1) both;
+    position: relative;
+    z-index: 2;
+  }
+
+  @keyframes popIn {
+    from { transform: scale(0.5) rotate(-4deg); opacity: 0; }
+    to { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+
+  .lock-icon { font-size: 56px; display: block; margin-bottom: 8px; animation: sway 3s ease-in-out infinite; }
+  @keyframes sway { 0%,100%{transform:rotate(-8deg);} 50%{transform:rotate(8deg);} }
+
+  .lock-title { font-family:'Pacifico',cursive; font-size:1.6rem; color:#c0186a; margin-bottom:6px; text-shadow:2px 2px 0 #ffaad4; }
+  .lock-hint { font-size:0.88rem; color:#e86fa8; margin-bottom:24px; font-weight:700; }
+
+  .pw-input {
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: 50px;
+    border: 2px solid #f9a8d4;
+    background: #fff0f7;
+    font-size: 1.1rem;
+    color: #be185d;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .pw-input:focus { border-color:#ec4899; box-shadow:0 0 0 3px rgba(236,72,153,0.2); }
+  .pw-input.shake { animation:shake 0.5s ease; border-color:#e11d48; }
+  @keyframes shake {
+    0%,100%{transform:translateX(0);}
+    20%{transform:translateX(-10px);}
+    40%{transform:translateX(10px);}
+    60%{transform:translateX(-8px);}
+    80%{transform:translateX(8px);}
+  }
+
+  .unlock-btn {
+    margin-top: 18px;
+    width: 100%;
+    padding: 14px;
+    border-radius: 50px;
+    border: none;
+    background: linear-gradient(135deg, #ec4899, #f472b6);
+    color: white;
+    font-size: 1.05rem;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(236,72,153,0.4);
+    transition: transform 0.15s, box-shadow 0.15s;
+    letter-spacing: 0.04em;
+  }
+  .unlock-btn:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(236,72,153,0.45); }
+  .unlock-btn:active { transform:scale(0.97); }
+
+  .error-msg { margin-top:12px; font-size:0.85rem; color:#e11d48; font-weight:700; min-height:20px; }
+  .hearts-deco { margin-top:20px; font-size:20px; opacity:0.6; }
+
+  #birthdayScreen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  .confetti-container { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; }
+  .confetti { position:absolute; opacity:0.9; animation:fall linear infinite; }
+  @keyframes fall {
+    0%{transform:translateY(-20px) rotate(0deg); opacity:1;}
+    100%{transform:translateY(110vh) rotate(720deg); opacity:0.2;}
+  }
+
+  .card {
+    background: linear-gradient(160deg, #fff0f7 0%, #ffe4f0 100%);
+    border-radius: 36px;
+    padding: 36px 44px 32px;
+    max-width: 440px;
+    width: 92%;
+    text-align: center;
+    box-shadow: 0 24px 70px rgba(255,80,160,0.35), 0 0 0 4px #ffb6d9;
+    position: relative;
+    z-index: 1;
+    border: 2px solid #ffa0cc;
+    animation: reveal 0.9s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+  @keyframes reveal {
+    from{transform:scale(0.3) rotate(8deg); opacity:0;}
+    to{transform:scale(1) rotate(0deg); opacity:1;}
+  }
+
+  .bear { width:150px; height:150px; margin:0 auto 14px; animation:bounce 2s ease-in-out infinite; }
+  @keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+
+  .balloons { display:flex; justify-content:center; gap:10px; margin-bottom:10px; }
+  .balloon { font-size:30px; animation:bsway 3s ease-in-out infinite; }
+  .balloon:nth-child(2){animation-delay:0.5s; font-size:26px;}
+  .balloon:nth-child(3){animation-delay:1s;}
+  @keyframes bsway { 0%,100%{transform:rotate(-10deg);} 50%{transform:rotate(10deg);} }
+
+  h1 { font-family:'Pacifico',cursive; font-size:1.75rem; color:#c0186a; margin-bottom:2px; line-height:1.25; text-shadow:2px 2px 0 #ffaad4; }
+  .name { font-family:'Pacifico',cursive; font-size:2.2rem; color:#e0457b; display:block; text-shadow:3px 3px 0 #ffcce5; animation:namePulse 2s ease-in-out infinite; }
+  @keyframes namePulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.04);} }
+  .subtitle { font-size:0.95rem; color:#e86fa8; font-weight:700; letter-spacing:0.06em; margin:6px 0 18px; }
+  .hearts { font-size:24px; animation:pulse 1.2s ease-in-out infinite; margin-bottom:10px; display:block; }
+  @keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.3);} }
+  .message { background:#ffe0ef; border-radius:18px; padding:14px 20px; font-size:0.93rem; color:#a0185a; line-height:1.7; border:1.5px dashed #f9a8d4; margin-top:6px; }
+  .cake-row { font-size:38px; margin:14px 0 8px; animation:wiggle 1.5s ease-in-out infinite; }
+  @keyframes wiggle { 0%,100%{transform:rotate(0deg);} 25%{transform:rotate(-6deg);} 75%{transform:rotate(6deg);} }
+  .sparkle-row { font-size:18px; margin-top:14px; animation:fadeInOut 2s ease-in-out infinite; }
+  @keyframes fadeInOut { 0%,100%{opacity:0.5;} 50%{opacity:1;} }
+</style>
+</head>
+<body>
+
+<!-- LOCK SCREEN -->
+<div id="lockScreen">
+  <span class="lock-icon">🔒</span>
+  <p class="lock-title">Secret Surprise!</p>
+  <p class="lock-hint">Enter the password to unlock 💝</p>
+  <input class="pw-input" id="pwInput" type="password" placeholder="✦ Enter password ✦" maxlength="20" />
+  <button class="unlock-btn" onclick="tryUnlock()">Open My Surprise 🌸</button>
+  <p class="error-msg" id="errMsg"></p>
+  <div class="hearts-deco">💗 💕 💖 💗 💕</div>
+</div>
+
+<!-- BIRTHDAY SCREEN -->
+<div id="birthdayScreen">
+  <div class="confetti-container" id="confetti"></div>
+  <div class="card">
+    <div class="balloons">
+      <span class="balloon">🎈</span>
+      <span class="balloon">💗</span>
+      <span class="balloon">🎈</span>
+    </div>
+    <svg class="bear" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="38" cy="38" r="20" fill="#f472b6"/>
+      <circle cx="102" cy="38" r="20" fill="#f472b6"/>
+      <circle cx="38" cy="38" r="12" fill="#fbb6d9"/>
+      <circle cx="102" cy="38" r="12" fill="#fbb6d9"/>
+      <circle cx="70" cy="75" r="44" fill="#f472b6"/>
+      <ellipse cx="70" cy="90" rx="24" ry="16" fill="#fbb6d9"/>
+      <circle cx="56" cy="68" r="8" fill="white"/>
+      <circle cx="84" cy="68" r="8" fill="white"/>
+      <circle cx="57.5" cy="69" r="4.5" fill="#831843"/>
+      <circle cx="85.5" cy="69" r="4.5" fill="#831843"/>
+      <circle cx="59" cy="67" r="1.5" fill="white"/>
+      <circle cx="87" cy="67" r="1.5" fill="white"/>
+      <ellipse cx="46" cy="83" rx="10" ry="6.5" fill="#fb7bb8" opacity="0.65"/>
+      <ellipse cx="94" cy="83" rx="10" ry="6.5" fill="#fb7bb8" opacity="0.65"/>
+      <ellipse cx="70" cy="87" rx="7" ry="5" fill="#be185d"/>
+      <path d="M62 96 Q70 105 78 96" stroke="#be185d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <polygon points="70,10 48,52 92,52" fill="#ec4899"/>
+      <polygon points="70,10 48,52 60,52" fill="#f9a8d4" opacity="0.6"/>
+      <line x1="48" y1="52" x2="92" y2="52" stroke="#fce7f3" stroke-width="3"/>
+      <text x="64" y="42" font-size="15" fill="#fce7f3">★</text>
+      <circle cx="70" cy="11" r="6" fill="#fce7f3"/>
+      <ellipse cx="22" cy="102" rx="14" ry="9" fill="#f472b6" transform="rotate(-30 22 102)"/>
+      <ellipse cx="118" cy="102" rx="14" ry="9" fill="#f472b6" transform="rotate(30 118 102)"/>
+      <text x="8" y="110" font-size="15" fill="#be185d">♥</text>
+      <text x="109" y="110" font-size="15" fill="#be185d">♥</text>
+      <ellipse cx="58" cy="52" rx="9" ry="5" fill="#fce7f3" transform="rotate(-20 58 52)"/>
+      <ellipse cx="82" cy="52" rx="9" ry="5" fill="#fce7f3" transform="rotate(20 82 52)"/>
+      <circle cx="70" cy="52" r="4" fill="#fce7f3"/>
+    </svg>
+    <h1>Happy Birthday,</h1>
+    <span class="name">Geetanjali!</span>
+    <p class="subtitle">🌸 You deserve all the love in the world 🌸</p>
+    <span class="hearts">💖 💗 💓 💕 💝</span>
+    <div class="cake-row">🎂🌸🎀</div>
+    <div class="message">
+      Today is your special day, Geetanjali! 🌷<br>
+      May your life be filled with pink roses,<br>
+      sweet surprises & endless love. 💕<br>
+      <strong style="color:#c0186a;">You are truly cherished! ✨</strong>
+    </div>
+    <div class="sparkle-row">🌸 ✨ 💖 ✨ 🌸</div>
+  </div>
+</div>
+
+<script>
+  const pwInput = document.getElementById('pwInput');
+  pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+
+  function tryUnlock() {
+    const val = pwInput.value.trim();
+    if (val.toLowerCase() === 'kavya') {
+      document.getElementById('lockScreen').style.display = 'none';
+      const bday = document.getElementById('birthdayScreen');
+      bday.style.display = 'flex';
+      spawnConfetti();
+    } else {
+      const inp = document.getElementById('pwInput');
+      const err = document.getElementById('errMsg');
+      inp.classList.remove('shake');
+      void inp.offsetWidth;
+      inp.classList.add('shake');
+      err.textContent = '❌ Wrong password! Try again 💕';
+      pwInput.value = '';
+      setTimeout(() => { err.textContent = ''; inp.classList.remove('shake'); }, 2500);
+    }
+  }
+
+  function spawnConfetti() {
+    const pinks = ['#ff5fa3','#ff85c0','#ffb3d9','#f472b6','#fce7f3','#ec4899','#fb7bb8','#fbb6d9','#ff69b4','#ffadd2'];
+    const container = document.getElementById('confetti');
+    for (let i = 0; i < 70; i++) {
+      const el = document.createElement('div');
+      el.className = 'confetti';
+      const size = 8 + Math.random() * 9;
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.width = size + 'px';
+      el.style.height = size + 'px';
+      el.style.background = pinks[Math.floor(Math.random() * pinks.length)];
+      el.style.borderRadius = Math.random() > 0.4 ? '50%' : '3px';
+      el.style.animationDuration = (3.5 + Math.random() * 5) + 's';
+      el.style.animationDelay = (Math.random() * 4) + 's';
+      container.appendChild(el);
+    }
+  }
+</script>
+</body>
+</html>
